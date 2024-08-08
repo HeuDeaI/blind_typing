@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Grandstander:700");
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Grandstander", Helvetica;
+    font-weight: bold;
+}
+span{
+    color: brown;
+}
