@@ -9,41 +9,27 @@ export default{
       Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
       Aldus PageMaker including versions of Lorem Ipsum.`.replace(/\s+/g, ' '),
       typing_letter: '',
-      old_length: 0,
-      line_jump_index: 0,
       count: 0,
     };
   },
   methods: {
     text_render(){
+      let next_letter = document.getElementById("next_letter");
       if (this.typing_letter === this.text_for_typing[this.count]){
+        next_letter.className = "";
         this.count++;
       } else {
-        this.mistake_animation("next_letter", "fading");
+        this.mistake_animation(next_letter, next_letter.innerText === ' ' ? "space" : "fading");
       };
-      // if (this.new_line_detection("text_for_typing")){
-      //     this.line_jump_index = this.count;
-      // };
       this.typing_letter = null;
-      console.log(document.getElementById("text_for_typing").textContent.split(' ')[0])
-      console.log(document.getElementById("text_for_typing").offsetHeight)
-      console.log()
     },
-    mistake_animation(id, class_name){
-      let element = document.getElementById(id);
-      element.classList.remove(class_name);
+    mistake_animation(element, class_name){
+      element.className = "";
       element.offsetWidth;
-      element.classList.add(class_name);
+      element.className = class_name;
     },
     text_focus(){
       document.getElementById("typing_letter").focus()
-    },
-    new_line_detection(id){
-      let element = document.getElementById(id);
-      let new_length = element.offsetHeight;
-      let res = new_length < this.old_length;
-      this.old_length = new_length;
-      return res;
     }
   }
 };
@@ -70,19 +56,17 @@ export default{
 }
 
 #input_box{
-  font-family: "Grandstander", Helvetica;
-  font-weight: bold;
   background-color: lightgray;
+  color: black;
   width: 80%;
   border-radius: 0.5em;
   border: 0.12em solid;
-  border-color: #000000;
+  border-color: black;
   padding: 1em;
-  font-size: x-large;
+  font-size: 1.5em;
   text-align: left;
-  text-shadow: grey 0.04em 0.04em 0.5em;
+  /* text-shadow: grey 0.04em 0.04em 0.5em; */
   line-height: 1.5em;
-  caret-color: darkblue;
 }
 
 #correct_text{
@@ -90,20 +74,38 @@ export default{
 }
 
 #typing_letter{
-  font-family: "Grandstander", Helvetica;
-  font-weight: bold;
   background-color: lightgray;
   border: none;
   outline: none;
   width: 0.07em;
-  font-size: xx-large;
+  font-size: 1.12em;
+  caret-color: darkblue;
+}
+
+
+#next_letter{
+  border-radius: 0.5em;
+  font-size: 1.12em;
+  color: black;
 }
 
 .fading{
   animation: fading 1s linear;
 }
+
+.space{
+  animation: space_fading 1s linear;
+}
+
 @keyframes fading {
   0% { color: red; }
-  100% {color: 000; }
+  100% { color: black; }
 }
+
+@keyframes space_fading {
+  0% { background-color: red; }
+  100% { background-color: lightgray; }
+}
+
+
 </style>
