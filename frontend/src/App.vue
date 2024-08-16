@@ -14,22 +14,21 @@ export default{
   },
   methods: {
     text_render(){
-      let next_letter = document.getElementById("next_letter");
+      this.$refs.next_letter.className = null;
       if (this.typing_letter === this.text_for_typing[this.count]){
-        next_letter.className = "";
         this.count++;
       } else {
-        this.mistake_animation(next_letter, next_letter.innerText === ' ' ? "space" : "fading");
+        this.mistake_animation(this.$refs.next_letter, this.$refs.next_letter.innerText === ' '
+        ? "space_fading" : "letter_fading");
       };
       this.typing_letter = null;
     },
     mistake_animation(element, class_name){
-      element.className = "";
-      element.offsetWidth;
+      void element.offsetWidth;
       element.className = class_name;
     },
     text_focus(){
-      document.getElementById("typing_letter").focus()
+      this.$refs.typing_letter.focus();
     }
   }
 };
@@ -37,36 +36,38 @@ export default{
 
 <template>
   <main>
-    <h1 class="main_name">
+    <h1 id="main_name">
       blind_typing
     </h1>
     <div id="input_box" @click="text_focus">
-    <span id="correct_text">{{ text_for_typing.substring(line_jump_index, count) }}</span>
-    <input id="typing_letter" autofocus v-model="typing_letter" @input="text_render"
-    autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
-    <span id="next_letter">{{ text_for_typing.charAt(count) }}</span>
-    <span id="text_for_typing">{{ text_for_typing.substring(count + 1) }}</span>
+      <span id="correct_text">{{ text_for_typing.substring(0, count) }}</span>
+      <span id="text_for_typing">
+        <input id="typing_letter" ref="typing_letter" v-model="typing_letter" @input="text_render"
+        autofocus autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+        <span id="next_letter" ref="next_letter">{{ text_for_typing.charAt(count) }}
+        </span>{{ text_for_typing.substring(count + 1) }}
+      </span>
     </div>
   </main>
 </template>
 
 <style scoped>
-.main_name{
+#main_name{
   font-size: 4em;
 }
 
 #input_box{
-  background-color: lightgray;
-  color: black;
   width: 80%;
-  border-radius: 0.5em;
-  border: 0.12em solid;
-  border-color: black;
-  padding: 1em;
-  font-size: 1.5em;
-  text-align: left;
-  /* text-shadow: grey 0.04em 0.04em 0.5em; */
   line-height: 1.5em;
+  padding: 1em;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  text-align: start;
+  font-size: 1.5em;
+  text-shadow: grey 0.04em 0.04em 0.5em;
+  background-color: lightgray;
+  border-radius: 0.5em;
+  border: 0.12em solid black;
 }
 
 #correct_text{
@@ -74,38 +75,33 @@ export default{
 }
 
 #typing_letter{
-  background-color: lightgray;
+  background-color: transparent;
+  position: absolute;
   border: none;
   outline: none;
-  width: 0.07em;
   font-size: 1.12em;
   caret-color: darkblue;
+  width: 0.1em;
 }
-
 
 #next_letter{
   border-radius: 0.5em;
-  font-size: 1.12em;
-  color: black;
+  margin-left: 0.1em;
 }
 
-.fading{
-  animation: fading 1s linear;
+.letter_fading{
+  animation: letter_fading 1s ease-in-out;
 }
 
-.space{
-  animation: space_fading 1s linear;
+.space_fading{
+  animation: space_fading 1s ease-in-out;
 }
 
-@keyframes fading {
-  0% { color: red; }
-  100% { color: black; }
+@keyframes letter_fading {
+  from { color: red; }
 }
 
 @keyframes space_fading {
-  0% { background-color: red; }
-  100% { background-color: lightgray; }
+  from { background-color: red; }
 }
-
-
 </style>
