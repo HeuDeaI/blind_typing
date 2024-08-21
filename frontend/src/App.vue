@@ -125,6 +125,7 @@ export default{
 #typing_letter{
   background-color: transparent;
   padding: 0em;
+  position: absolute;
   border: none;
   outline: none;
   font-size: 1.12em;
