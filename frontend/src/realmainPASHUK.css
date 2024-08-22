@@ -1,0 +1,88 @@
+#main_name {
+    font-size: 3.6em;
+    margin-bottom: 0;
+}
+
+#typing_information {
+    flex-direction: row;
+    display: flex;
+    width: 80%;
+    font-size: 1.4em;
+    flex-wrap: wrap-reverse;
+    box-sizing: border-box;
+    justify-content: left;
+    padding-bottom: 0.2em;
+    padding-top: 0.2em;
+    padding-left: 1.5em;
+}
+
+#precent_of_mistakes {
+    padding-right: 2em;
+}
+
+#input_box {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: lightgray;
+    border-radius: 0.5em;
+    border: 0.12em solid black;
+    padding: 1em;
+}
+
+#text_field {
+    line-height: 1.5em;
+    position: relative;
+    white-space: pre-wrap;
+    text-align: start;
+    font-size: 1.5em;
+    text-shadow: grey 0.04em 0.04em 0.5em;
+}
+
+#correct_text {
+    color: lawngreen;
+    padding: 0;
+    margin: 0;
+}
+
+#text_for_typing {
+    padding: 0;
+    margin: 0;
+}
+
+.text-letter.current {
+    color: blue;
+    text-decoration: underline;
+}
+
+#complete_message {
+    position: absolute;
+    background-color: red;
+    text-align: center;
+    font-size: 3em;
+    visibility: hidden;
+}
+
+#debug_info {
+    margin-top: 1em;
+    font-size: 1.2em;
+    color: darkred;
+}
+
+.letter_fading {
+    animation: letter_fading 1s ease-in-out;
+}
+
+.space_fading {
+    animation: space_fading 1s ease-in-out;
+}
+
+@keyframes letter_fading {
+    from { color: red; }
+}
+
+@keyframes space_fading {
+    from { background-color: red; }
+}
