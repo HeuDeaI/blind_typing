@@ -24,10 +24,10 @@ export default{
   methods: {
     async fetch_text() {
       try {
-        const response = await fetch('http://localhost:3000/text');
+        const response = await fetch('http://localhost:3000/text_for_typing');
         const data = await response.json();
         console.log(data);
-        this.text_for_typing = data.text;
+        this.text_for_typing = data.text_for_typing;
       } catch (error) {
         console.error('Error fetching text:', error);
       }
