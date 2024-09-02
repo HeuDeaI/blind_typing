@@ -2,12 +2,7 @@
 export default{
   data(){
     return {
-      text_for_typing: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the    
-      industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-      scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-      electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-      Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-      Aldus PageMaker including versions of Lorem Ipsum.`.replace(/\s+/g, ' '),
+      text_for_typing: '',
       typing_letter: '',
       right_count: 0,
       wrong_count: 0,
@@ -27,6 +22,16 @@ export default{
     },
   },
   methods: {
+    async fetch_text() {
+      try {
+        const response = await fetch('http://localhost:3000/text');
+        const data = await response.json();
+        console.log(data);
+        this.text_for_typing = data.text;
+      } catch (error) {
+        console.error('Error fetching text:', error);
+      }
+    },
     text_render() {
       if (!this.start_date) {
         this.start_date = new Date();
@@ -58,6 +63,9 @@ export default{
         this.$refs.typing_letter.style.visibility = "hidden";
       }
     },
+  },
+  mounted() {
+    this.fetch_text();
   },
 };
 </script>
