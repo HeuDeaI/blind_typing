@@ -63,6 +63,9 @@ export default{
         this.$refs.typing_letter.style.visibility = "hidden";
       }
     },
+    reload(){
+      location.reload();
+    }
   },
   mounted() {
     this.fetch_text();
@@ -72,7 +75,12 @@ export default{
 
 <template>
   <main>
-    <h1 id="main_name" @click="boost">
+    <div id="header">
+      <button id="authorization">
+        Sign up
+      </button>
+    </div>
+    <h1 id="main_name" @click="reload">
       blind_typing
     </h1>
     <div id="typing_information">
@@ -112,7 +120,7 @@ export default{
 <style scoped>
 #main_name{
   font-size: 3.6em;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 #typing_information{
@@ -150,7 +158,7 @@ export default{
   white-space: pre-wrap;
   text-align: start;
   font-size: 1.5em;
-  text-shadow: grey 0.04em 0.04em 0.5em;
+  text-shadow: 0.04em 0.04em 0.5em gray;
   filter: none;
 }
 
@@ -193,6 +201,31 @@ export default{
 
 #result_message{
   text-decoration: underline;
+}
+#header{
+  width: 100%;
+  margin: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+#authorization{
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 1.5em;
+  justify-self: end;
+  margin-right: 2em;
+  padding: 0.3em;
+  background-color: lightgray;
+  border-radius: 0.3em;
+  border: 0.08em solid black;
+  transition-duration: 0.4s;
+  box-shadow: 0.2em 0.2em 0.4em gray;
+}
+
+#authorization:hover{
+  background-color: darkgray;
 }
 
 .letter_fading{
